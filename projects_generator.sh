@@ -1,5 +1,9 @@
 #!/bin/bash
 
+destination_directory=$1
+solution_name="AoC_"$destination_directory
+solution_file=$solution_name".sln"
+
 create_input_file() {
   touch input.txt
 }
@@ -32,6 +36,16 @@ overwrite_csproj_file() {
 </Project>" >$1".csproj"
 }
 
+create_solution_file() {
+  pushd $destination_directory
+  if [ ! -f "$solution_file" ]; then
+    dotnet new sln -n $solution_name
+  else
+    echo "Solution file '$solution_file' already exists."
+  fi
+  popd
+}
+
 create_destination_directory() {
   if [ ! -d "$1" ]; then
     mkdir $1
@@ -49,22 +63,26 @@ create_destination_directory() {
 }
 
 generate_project() {
-  if [ ! -d "$1" ]; then
-    dotnet new console -n $1
-    pushd $1
+  project_name="DAY_"$1"_$2"
+  project_file=$project_name".csproj"
+  if [ ! -d "$project_name" ]; then
+    dotnet new console -n $project_name
+    pushd $project_name
     create_input_file
     overwrite_program_file
-    overwrite_csproj_file $1
+    overwrite_csproj_file $project_name
     popd
   else
-    echo "Project's directory '$1' already exists."
+    echo "Project's directory '$project_name' already exists."
   fi
+  dotnet sln add $project_name/$project_file
 }
 
 for day in {01..25}; do
-  create_destination_directory $1
-  pushd $1
-  generate_project "DAY_"$day"_1"
-  generate_project "DAY_"$day"_2"
+  create_destination_directory $destination_directory
+  create_solution_file $destination_directory
+  pushd $destination_directory
+  generate_project $day 1
+  generate_project $day 2
   popd
 done
