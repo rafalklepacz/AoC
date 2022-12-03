@@ -7,10 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-<ItemGroup>
-  <None Include="input.txt">
-    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-  </None>
-</ItemGroup>
+  <ItemGroup>
+    <None Include="input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
