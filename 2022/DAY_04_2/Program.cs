@@ -1,7 +1,10 @@
-﻿var inputFile = "input.txt";
+﻿using DAY_04_1;
+
+var inputFile = "input.txt";
 
 var result = File.ReadAllLines(inputFile)
-                 .AsEnumerable();
+                 .AsEnumerable()
+                 .Select(LineParser.Parse)
+                 .Count(pair => pair.HasOverlappedSection);
 
-Console.WriteLine();
-
+Console.WriteLine(result);
