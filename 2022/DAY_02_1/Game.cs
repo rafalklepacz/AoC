@@ -31,7 +31,24 @@ class Game
         };
 
     private void SetWonPoints()
-        => WonPoints = _second.ToPoints() + _result.ToPoints();
+        => WonPoints = GetShapePoints() + GetResultPoints();
+
+    private int GetShapePoints()
+        => _second switch
+        {
+            Shape.Rock => 1,
+            Shape.Paper => 2,
+            Shape.Scissor => 3,
+            _ => 0
+        };
+
+    private int GetResultPoints()
+        => _result switch
+        {
+            Result.Win => 6,
+            Result.Draw => 3,
+            _ => 0
+        };
 
     private readonly Shape _first;
     private readonly Shape _second;

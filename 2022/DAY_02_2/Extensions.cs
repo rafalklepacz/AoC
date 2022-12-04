@@ -11,12 +11,12 @@ public static class Extensions
             _ => throw new ArgumentOutOfRangeException(nameof(c), c, "Unknown shape type.")
         };
     
-    public static Shape ToSecondShape(this char c)
+    public static Result ToResultShape(this char c)
         => c switch
         {
-            'X' => Shape.Rock,
-            'Y' => Shape.Paper,
-            'Z' => Shape.Scissor,
+            'X' => Result.Lose,
+            'Y' => Result.Draw,
+            'Z' => Result.Win,
             _ => throw new ArgumentOutOfRangeException(nameof(c), c, "Unknown shape type.")
         };
 }
