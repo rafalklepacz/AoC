@@ -1,6 +1,12 @@
+using DAY_05_1;
+
 var inputFile = "input.txt";
+var text = File.ReadAllText(inputFile);
+var parser = InputParser.Parse(text);
 
-var result = File.ReadAllLines(inputFile)
-                 .AsEnumerable();
+var stacksContainer = parser.StacksContainer;
+var moves = parser.CrateMoves;
 
-Console.WriteLine();
+stacksContainer.MakeMoves(moves);
+
+Console.WriteLine(stacksContainer.GetTopCratesLabels());
