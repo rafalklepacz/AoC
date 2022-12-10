@@ -1,6 +1,15 @@
+using DAY_07_1;
+
 var inputFile = "input.txt";
 
-var result = File.ReadAllLines(inputFile)
-                 .AsEnumerable();
+var input = await File.ReadAllTextAsync(inputFile);
+var entry = InputParser.Parse(input);
 
-Console.WriteLine();
+int max = 100000;
+var sum = entry.FlatList
+                    .Where(e => e.IsDirectory && e.Size < max)
+                    .Select(e => e.Size)
+                    .OrderBy(i => i)
+                    .Sum();
+
+Console.WriteLine(sum);
