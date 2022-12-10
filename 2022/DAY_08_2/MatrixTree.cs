@@ -22,49 +22,47 @@ namespace DAY_08_2
                                .OrderBy(t => t.Row)
                                .ToArray();
 
-            var top = column.Take(new Range(0, Row)).ToArray();
-            var bottom = column.Take(new Range(Row + 1, column.Length)).ToArray();
-            var left = row.Take(new Range(0, Column)).ToArray();
-            var right = row.Take(new Range(Column + 1, row.Length)).ToArray();
+            var treesAbove = column.Take(new Range(0, Row)).ToArray();
+            var treesBelow = column.Take(new Range(Row + 1, column.Length)).ToArray();
+            var treesOnLeft = row.Take(new Range(0, Column)).ToArray();
+            var treesOnRight = row.Take(new Range(Column + 1, row.Length)).ToArray();
 
-            int topScore = 0,
-                bottomScore = 0,
-                leftScore = 0,
-                rightScore = 0;
+            int scoreAbove = CalculateScenicScoreDesc(treesAbove);
+            int scoreBelow = CalculateScenicScoreAsc(treesBelow);
+            int scoreOnLeft = CalculateScenicScoreDesc(treesOnLeft);
+            int scoreOnRight = CalculateScenicScoreAsc(treesOnRight);
 
-            for (int i = top.Length - 1; i >= 0; i--)
+            ScenicScore = scoreAbove * scoreBelow * scoreOnLeft * scoreOnRight;
+        }
+
+        private int CalculateScenicScoreDesc(MatrixTree[] array)
+        {
+            int result = 0;
+
+            for (int i = array.Length - 1; i >= 0; i--)
             {
-                topScore++;
-                var tree = top[i];
+                result++;
+                var tree = array[i];
                 if (tree.Height >= Height)
                     break;
             }
 
-            for (int i = 0; i < bottom.Length; i++)
+            return result;
+        }
+
+        private int CalculateScenicScoreAsc(MatrixTree[] array)
+        {
+            int result = 0;
+
+            for (int i = 0; i < array.Length; i++)
             {
-                bottomScore++;
-                var tree = bottom[i];
+                result++;
+                var tree = array[i];
                 if (tree.Height >= Height)
                     break;
             }
 
-            for (int i = left.Length - 1; i >= 0; i--)
-            {
-                leftScore++;
-                var tree = left[i];
-                if (tree.Height >= Height)
-                    break;
-            }
-
-            for (int i = 0; i < right.Length; i++)
-            {
-                rightScore++;
-                var tree = right[i];
-                if (tree.Height >= Height)
-                    break;
-            }
-
-            ScenicScore = topScore * bottomScore * leftScore * rightScore;
+            return result;
         }
     }
 }
