@@ -1,6 +1,14 @@
+using DAY_09_1;
+
 var inputFile = "input.txt";
 
-var result = File.ReadAllLines(inputFile)
-                 .AsEnumerable();
+var input = await File.ReadAllTextAsync(inputFile);
+var moves = InputParser.Parse(input);
+var rope = Rope.CreateAtDefaultPoint();
 
-Console.WriteLine();
+while (moves.Count > 0)
+{
+    rope.MoveHead(moves.Dequeue());
+}
+
+Console.WriteLine(rope.TailPositions.Distinct().Count());
