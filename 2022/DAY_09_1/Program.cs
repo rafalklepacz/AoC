@@ -8,7 +8,7 @@ var rope = Rope.CreateAtDefaultPoint();
 
 while (moves.Count > 0)
 {
-    rope.MoveHead(moves.Dequeue());
+    rope.Move(moves.Dequeue());
 }
 
 Console.WriteLine(rope.TailPositions.Distinct().Count());
