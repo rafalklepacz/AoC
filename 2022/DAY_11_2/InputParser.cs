@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace DAY_11_2;
+﻿namespace DAY_11_2;
 
 internal static class InputParser
 {
@@ -17,7 +15,7 @@ internal static class InputParser
                                 var testDivider = ParseTestDivider(lines[3]);
                                 var throwOnTrueToMonkeyNo = ParseThrowOnTrueToMonkeyNo(lines[4]);
                                 var throwOnFalseToMonkeyNo = ParseThrowOnFalseToMonkeyNo(lines[5]);
-                                
+
                                 return new Monkey(no, items, testDivider, throwOnTrueToMonkeyNo, throwOnFalseToMonkeyNo, operation);
                             })
                             .ToArray();
@@ -26,7 +24,7 @@ internal static class InputParser
     private static int ParseNo(string line)
     {
         string s = RemovePrefix(line, "Monkey ");
-        s = s.Substring(0, s.Length - 1);
+        s = s[..^1];
         return int.Parse(s);
     }
 
@@ -62,7 +60,7 @@ internal static class InputParser
         string @operator = tmp2.First();
         string operand = tmp2.Last();
         bool isUnaryOperation = operand.Trim().ToLower() == "old";
-        ulong.TryParse(operand, out ulong operandValue);
+        _ = ulong.TryParse(operand, out ulong operandValue);
 
         return @operator switch
         {
