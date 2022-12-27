@@ -3,13 +3,16 @@
 destination_directory=$1
 solution_name="AoC_"$destination_directory
 solution_file=$solution_name".sln"
+input_file_name="input.txt"
+example_file_name="example.txt"
 
 create_input_file() {
-  touch input.txt
+  touch $input_file_name
+  touch $example_file_name
 }
 
 overwrite_program_file() {
-  echo "var inputFile = \"input.txt\";
+  echo "var inputFile = \"$input_file_name\";
 
 var result = File.ReadAllLines(inputFile)
                  .AsEnumerable();
@@ -28,7 +31,13 @@ overwrite_csproj_file() {
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include=\"input.txt\">
+    <None Include=\"$input_file_name\">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include=\"$example_file_name\">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

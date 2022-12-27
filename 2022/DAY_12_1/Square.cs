@@ -15,9 +15,6 @@ public class Square
     public int Height { get; init; }
     public Point Position { get; init; }
 
-    public bool CheckSquareIsAvailable(Square square)
-        => _availableSquares.Contains(square);
-    
     public void SetAvailableSquares(IEnumerable<Square> availableSquares)
         => _availableSquares = availableSquares;
 

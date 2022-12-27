@@ -12,4 +12,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="example.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
