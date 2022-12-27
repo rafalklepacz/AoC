@@ -9,8 +9,8 @@ internal static class InputParser
                         var p = new Point(x, y);
                         var h = c switch
                         {
-                            'S' => 'a' - (96 + 1),
-                            'E' => 'z' - (96 - 1),
+                            'S' => 'a' - 96,
+                            'E' => 'z' - 96,
                             _ => c - 96
                         };
                         return new Square(c, h, p);
